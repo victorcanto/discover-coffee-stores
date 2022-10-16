@@ -4,17 +4,18 @@ import Image from 'next/image';
 import Banner from 'components/banner/banner.component';
 import Card from 'components/card/card.component';
 import styles from 'styles/Home.module.css';
-
-import coffeeStoresData from 'data/coffee-stores.json';
+import { fetchCoffeeStores, CoffeeStore } from 'lib/coffee-stores';
 
 interface HomeProps {
-  coffeeStores: typeof coffeeStoresData;
+  coffeeStores: CoffeeStore[];
 }
 
 export const getStaticProps: GetStaticProps<HomeProps> = async (context) => {
+  const coffeeStores = await fetchCoffeeStores();
+
   return {
     props: {
-      coffeeStores: coffeeStoresData,
+      coffeeStores,
     },
   };
 };
@@ -42,14 +43,14 @@ const Home: NextPage<HomeProps> = (props) => {
         </div>
         {props.coffeeStores.length > 0 && (
           <>
-            <h2 className={styles.heading2}>Toronto stores</h2>
+            <h2 className={styles.heading2}>Recife stores</h2>
             <div className={styles.cardLayout}>
-              {props.coffeeStores.map((coffeeStore) => (
+              {props.coffeeStores.map(({ id, name, imgUrl }) => (
                 <Card
-                  key={coffeeStore.id}
-                  name={coffeeStore.name}
-                  imgUrl={coffeeStore.imgUrl}
-                  href={`/coffee-store/${coffeeStore.id}`}
+                  key={id}
+                  name={name}
+                  imgUrl={imgUrl as string}
+                  href={`/coffee-store/${id}`}
                 />
               ))}
             </div>

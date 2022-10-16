@@ -13,7 +13,7 @@ interface CardProps {
 const Card = (props: CardProps) => {
   return (
     <Link href={props.href}>
-      <a>
+      <a className={styles.cardLink}>
         <div className={cls('glass', styles.container)}>
           <div className={styles.cardHeaderWrapper}>
             <h2 className={styles.cardHeader}>{props.name}</h2>
