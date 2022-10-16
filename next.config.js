@@ -4,8 +4,8 @@ const nextConfig = {
   swcMinify: true,
 
   images: {
-    domains: ['images.unsplash.com']
-  }
-}
+    domains: ['images.unsplash.com', 'api.foursquare.com'],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
